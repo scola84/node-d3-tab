@@ -1,0 +1,73 @@
+import { event, select } from 'd3-selection';
+
+export default class Buttons {
+  constructor(tab) {
+    this._tab = tab;
+    this._buttons = [];
+    this._color = '#007AFF';
+
+    this._root = select('body')
+      .append('div')
+      .classed('scola buttons-root', true);
+
+    this._inner = this._root
+      .append('div')
+      .classed('scola buttons', true);
+  }
+
+  destroy() {
+    this._buttons.forEach((button) => {
+      button.root().on('select.scola-tab', null);
+    });
+    this.buttons = [];
+
+    this._root.dispatch('destroy');
+    this._root.remove();
+    this._root = null;
+  }
+
+  root() {
+    return this._root;
+  }
+
+  inner() {
+    return this._inner;
+  }
+
+  color(color) {
+    if (typeof color === 'undefined') {
+      return this._color;
+    }
+
+    this._color = color;
+    return this;
+  }
+
+  append(button) {
+    this._buttons.push(button);
+    this._inner.node().appendChild(button.root().node());
+    button.root().on('select.scola-tab', this._handleSelect.bind(this));
+  }
+
+  index(value) {
+    if (typeof value === 'number') {
+      return this._buttons[value];
+    }
+
+    return this._buttons.indexOf(value);
+  }
+
+  _handleSelect() {
+    if (event.detail.button.selected() === false) {
+      event.detail.button.root().styles({
+        'background-color': 'inherit',
+        'color': 'inherit'
+      });
+
+      return;
+    }
+
+    const index = this._buttons.indexOf(event.detail.button);
+    this._tab.select(index);
+  }
+}
