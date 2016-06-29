@@ -1,5 +1,5 @@
 import Tab from './tab';
-import Buttons from './inline-buttons';
+import InlineTabButtons from './inline-buttons';
 
 export default class InlineTab extends Tab {
   constructor() {
@@ -28,7 +28,7 @@ export default class InlineTab extends Tab {
       return this;
     }
 
-    this._buttons = new Buttons(this);
+    this._buttons = new InlineTabButtons(this);
 
     this._root.node()
       .appendChild(this._buttons.root().node());

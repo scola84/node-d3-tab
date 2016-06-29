@@ -1,7 +1,7 @@
 import { event } from 'd3-selection';
-import Buttons from './buttons';
+import TabButtons from './buttons';
 
-export default class InlineButtons extends Buttons {
+export default class InlineTabButtons extends TabButtons {
   constructor(tab) {
     super(tab);
 

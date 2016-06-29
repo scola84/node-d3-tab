@@ -1,6 +1,6 @@
 import { event, select } from 'd3-selection';
 
-export default class Buttons {
+export default class TabButtons {
   constructor(tab) {
     this._tab = tab;
     this._buttons = [];

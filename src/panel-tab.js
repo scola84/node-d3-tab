@@ -1,5 +1,5 @@
 import Tab from './tab';
-import Buttons from './panel-buttons';
+import PanelTabButtons from './panel-buttons';
 
 export default class PanelTab extends Tab {
   constructor() {
@@ -19,7 +19,7 @@ export default class PanelTab extends Tab {
       return this;
     }
 
-    this._buttons = new Buttons(this);
+    this._buttons = new PanelTabButtons(this);
 
     this._root.node()
       .appendChild(this._buttons.root().node());

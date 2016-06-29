@@ -1,6 +1,6 @@
 import { select } from 'd3-selection';
 
-export default class Button {
+export default class TabButton {
   constructor() {
     this._selected = false;
 

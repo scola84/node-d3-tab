@@ -1,6 +1,6 @@
-import Button from './button';
+import TabButton from './button';
 
-export default class PanelButton extends Button {
+export default class InlineTabButton extends TabButton {
   constructor() {
     super();
 
