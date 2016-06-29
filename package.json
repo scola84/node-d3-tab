@@ -16,6 +16,5 @@
   "scripts": {
     "build": "rollup -c -n d3 -o dist/d3-tab.js",
     "build:min": "uglifyjs dist/d3-tab.js -c -m -o dist/d3-tab.min.js"
-  },
-  "dependencies": {}
+  }
 }
