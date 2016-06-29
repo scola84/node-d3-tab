@@ -16,10 +16,8 @@ export default class TabButtons {
   }
 
   destroy() {
-    this._buttons.forEach((button) => {
-      this._unbindButton(button);
-    });
-    this.buttons = [];
+    this._buttons.forEach((button) => this._unbindButton(button));
+    this._buttons = [];
 
     this._root.dispatch('destroy');
     this._root.remove();

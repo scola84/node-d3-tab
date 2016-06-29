@@ -7,15 +7,6 @@ export default class InlineTab extends Tab {
     this._root.classed('inline', true);
   }
 
-  destroy() {
-    super.destroy();
-
-    if (this._buttons) {
-      this._buttons.destroy();
-      this._buttons = null;
-    }
-  }
-
   buttons(action) {
     if (typeof action === 'undefined') {
       return this._buttons;

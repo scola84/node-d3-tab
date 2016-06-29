@@ -5,7 +5,9 @@ export default class Tab {
   constructor() {
     this._selected = [];
     this._tabs = [];
+
     this._buttons = null;
+    this._slider = null;
 
     this._root = select('body')
       .append('div')
@@ -32,6 +34,11 @@ export default class Tab {
     if (this._buttons) {
       this._buttons.destroy();
       this._buttons = null;
+    }
+
+    if (this._slider) {
+      this._slider.destroy();
+      this._slider = null;
     }
 
     this._root.dispatch('destroy');
