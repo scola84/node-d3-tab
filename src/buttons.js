@@ -17,7 +17,7 @@ export default class TabButtons {
 
   destroy() {
     this._buttons.forEach((button) => {
-      button.root().on('select.scola-tab', null);
+      this._unbindButton(button);
     });
     this.buttons = [];
 
@@ -46,7 +46,7 @@ export default class TabButtons {
   append(button) {
     this._buttons.push(button);
     this._inner.node().appendChild(button.root().node());
-    button.root().on('select.scola-tab', this._handleSelect.bind(this));
+    this._bindButton(button);
   }
 
   index(value) {
@@ -55,6 +55,15 @@ export default class TabButtons {
     }
 
     return this._buttons.indexOf(value);
+  }
+
+  _bindButton(button) {
+    button.root().on('select.scola-tab-buttons',
+      this._handleSelect.bind(this));
+  }
+
+  _unbindButton(button) {
+    button.root().on('select.scola-tab-buttons', null);
   }
 
   _handleSelect() {

@@ -13,8 +13,7 @@ export default class InlineTabButton extends TabButton {
         'display': 'flex',
         'flex': '1 1 0',
         'justify-content': 'center'
-      })
-      .on('click.scola-tab', this._handleClick.bind(this));
+      });
 
     this._text = this._root
       .append('div')
@@ -22,10 +21,12 @@ export default class InlineTabButton extends TabButton {
       .styles({
         'font-size': '0.9em'
       });
+
+    this._bind();
   }
 
   destroy() {
-    this._root.on('click.scola-tab', null);
+    this._unbind();
     this._root.dispatch('destroy');
     this._root.remove();
     this._root = null;
@@ -44,5 +45,14 @@ export default class InlineTabButton extends TabButton {
       .text(text);
 
     return this;
+  }
+
+  _bind() {
+    this._root.on('click.scola-inline-tab-button',
+      this._handleClick.bind(this));
+  }
+
+  _unbind() {
+    this._root.on('click.scola-inline-tab-button', null);
   }
 }
