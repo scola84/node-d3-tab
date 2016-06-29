@@ -11,6 +11,7 @@ export default class Tab {
 
     this._root = select('body')
       .append('div')
+      .remove()
       .classed('scola tab', true)
       .styles({
         'display': 'flex',

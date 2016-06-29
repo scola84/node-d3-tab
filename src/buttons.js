@@ -8,6 +8,7 @@ export default class TabButtons {
 
     this._root = select('body')
       .append('div')
+      .remove()
       .classed('scola buttons-root', true);
 
     this._inner = this._root
