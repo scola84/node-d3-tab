@@ -26,14 +26,16 @@ export default class InlineTabButtons extends TabButtons {
   }
 
   color(color) {
-    super.color(color);
+    if (typeof color === 'undefined') {
+      return super.color();
+    }
 
     this._inner.styles({
-      'border-color': this._color,
-      'color': this._color
+      'border-color': color,
+      color
     });
 
-    return this;
+    return super.color(color);
   }
 
   _handleSelect() {
