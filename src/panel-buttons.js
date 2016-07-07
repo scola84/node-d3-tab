@@ -1,3 +1,4 @@
+import { event } from 'd3-selection';
 import TabButtons from './buttons';
 
 export default class PanelTabButtons extends TabButtons {
