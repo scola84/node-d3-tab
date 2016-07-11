@@ -27,7 +27,9 @@ export default class Tab {
       .styles({
         'flex': 1,
         'order': 2,
-        'position': 'relative'
+        'overflow': 'auto',
+        'position': 'relative',
+        '-webkit-overflow-scrolling': 'touch'
       });
   }
 

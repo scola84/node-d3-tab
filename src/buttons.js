@@ -12,7 +12,8 @@ export default class TabButtons {
       .classed('scola buttons', true);
 
     this._inner = this._root
-      .append('div');
+      .append('div')
+      .classed('scola inner', true);
   }
 
   destroy() {
