@@ -12,9 +12,7 @@ export default class PanelTabButtons extends TabButtons {
       'display': 'flex',
       'height': '3em',
       'justify-content': 'center',
-      'order': 3,
-      'position': 'relative',
-      'width': '100%'
+      'order': 3
     });
 
     this._inner.styles({

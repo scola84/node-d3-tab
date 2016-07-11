@@ -25,9 +25,8 @@ export default class Tab {
       .append('div')
       .classed('scola inner', true)
       .styles({
-        'flex-grow': 1,
-        'order': 2,
-        'width': '100%'
+        'flex': 1,
+        'order': 2
       });
   }
 

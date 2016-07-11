@@ -9,11 +9,10 @@ export default class TabButtons {
     this._root = select('body')
       .append('div')
       .remove()
-      .classed('scola buttons-root', true);
+      .classed('scola buttons', true);
 
     this._inner = this._root
-      .append('div')
-      .classed('scola buttons', true);
+      .append('div');
   }
 
   destroy() {

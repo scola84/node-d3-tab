@@ -7,7 +7,7 @@ export default class PanelTabButton extends TabButton {
     this._root
       .styles({
         'cursor': 'pointer',
-        'flex': '1 1 0',
+        'flex': 1,
         'text-align': 'center'
       });
 

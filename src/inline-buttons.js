@@ -10,9 +10,7 @@ export default class InlineTabButtons extends TabButtons {
       'display': 'flex',
       'height': '3em',
       'justify-content': 'center',
-      'order': 1,
-      'position': 'relative',
-      'width': '100%'
+      'order': 1
     });
 
     this._inner.styles({

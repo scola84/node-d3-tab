@@ -4,22 +4,36 @@ export default class InlineTabButton extends TabButton {
   constructor() {
     super();
 
-    this._root
+    this._root.styles({
+      'align-items': 'center',
+      'border-color': 'inherit',
+      'color': 'inherit',
+      'cursor': 'pointer',
+      'display': 'flex',
+      'flex': 1
+    });
+
+    this._border = this._root
+      .append('div')
+      .classed('scola border', true)
       .styles({
-        'align-items': 'center',
-        'border-left': '1px solid inherit',
-        'color': 'inherit',
-        'cursor': 'pointer',
-        'display': 'flex',
-        'flex': '1 1 0',
-        'justify-content': 'center'
+        'border-left-width': '1px',
+        'border-left-style': 'solid',
+        'border-left-color': 'inherit',
+        'display': 'inline',
+        'height': '100%',
+        'order': 1,
+        'width': 0
       });
 
     this._text = this._root
       .append('div')
       .classed('scola text', true)
       .styles({
-        'font-size': '0.9em'
+        'flex': 1,
+        'font-size': '0.9em',
+        'order': 2,
+        'text-align': 'center'
       });
 
     this._bind();
@@ -41,9 +55,12 @@ export default class InlineTabButton extends TabButton {
       return this._text;
     }
 
-    this._text
-      .text(text);
+    this._text.text(text);
+    return this;
+  }
 
+  first(action = true) {
+    this._border.style('display', action === true ? 'none' : 'inline');
     return this;
   }
 
