@@ -26,7 +26,8 @@ export default class Tab {
       .classed('scola inner', true)
       .styles({
         'flex': 1,
-        'order': 2
+        'order': 2,
+        'position': 'relative'
       });
   }
 
