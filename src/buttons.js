@@ -57,8 +57,7 @@ export default class TabButtons {
   }
 
   _bindButton(button) {
-    button.root().on('select.scola-tab-buttons',
-      this._handleSelect.bind(this));
+    button.root().on('select.scola-tab-buttons', () => this._handleSelect());
   }
 
   _unbindButton(button) {

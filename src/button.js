@@ -8,9 +8,12 @@ export default class TabButton {
       .append('div')
       .remove()
       .classed('scola button', true);
+
+    this._bind();
   }
 
   destroy() {
+    this._unbind();
     this._root.dispatch('destroy');
     this._root.remove();
     this._root = null;
@@ -40,6 +43,14 @@ export default class TabButton {
       });
 
     return this;
+  }
+
+  _bind() {
+    this._root.on('click.scola-inline-tab-button', () => this._handleClick());
+  }
+
+  _unbind() {
+    this._root.on('click.scola-inline-tab-button', null);
   }
 
   _handleClick() {

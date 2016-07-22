@@ -4,8 +4,7 @@ export default class PanelTabButton extends TabButton {
   constructor() {
     super();
 
-    this._root
-      .styles({
+    this._root.styles({
         'cursor': 'pointer',
         'flex': 1,
         'text-align': 'center'
@@ -28,17 +27,6 @@ export default class PanelTabButton extends TabButton {
     this._bind();
   }
 
-  destroy() {
-    this._unbind();
-    this._root.dispatch('destroy');
-    this._root.remove();
-    this._root = null;
-  }
-
-  root() {
-    return this._root;
-  }
-
   icon(name) {
     if (typeof name === 'undefined') {
       return this._icon;
@@ -55,14 +43,5 @@ export default class PanelTabButton extends TabButton {
 
     this._text.text(text);
     return this;
-  }
-
-  _bind() {
-    this._root.on('click.scola-panel-tab-button',
-      this._handleClick.bind(this));
-  }
-
-  _unbind() {
-    this._root.on('click.scola-panel-tab-button', null);
   }
 }

@@ -39,17 +39,6 @@ export default class InlineTabButton extends TabButton {
     this._bind();
   }
 
-  destroy() {
-    this._unbind();
-    this._root.dispatch('destroy');
-    this._root.remove();
-    this._root = null;
-  }
-
-  root() {
-    return this._root;
-  }
-
   text(text) {
     if (typeof text === 'undefined') {
       return this._text;
@@ -62,14 +51,5 @@ export default class InlineTabButton extends TabButton {
   first(action = true) {
     this._border.style('display', action === true ? 'none' : 'inline');
     return this;
-  }
-
-  _bind() {
-    this._root.on('click.scola-inline-tab-button',
-      this._handleClick.bind(this));
-  }
-
-  _unbind() {
-    this._root.on('click.scola-inline-tab-button', null);
   }
 }

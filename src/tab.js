@@ -40,6 +40,7 @@ export default class Tab {
     }
 
     if (this._slider) {
+      this._slider.root().on('slide.scola-tab', null);
       this._slider.destroy();
       this._slider = null;
     }
@@ -75,7 +76,7 @@ export default class Tab {
     this._inner.node()
       .appendChild(this._slider.root().node());
 
-    this._slider.root().on('slide', this._handleSlide.bind(this));
+    this._slider.root().on('slide.scola-tab', () => this._handleSlide());
 
     return this;
   }
