@@ -33,12 +33,12 @@ export default class TabButtons {
     return this._inner;
   }
 
-  color(color) {
-    if (typeof color === 'undefined') {
+  color(value) {
+    if (typeof value === 'undefined') {
       return this._color;
     }
 
-    this._color = color;
+    this._color = value;
     return this;
   }
 

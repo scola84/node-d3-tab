@@ -41,22 +41,22 @@ export default class InlineTabButton extends TabButton {
     this._bind();
   }
 
-  text(text) {
-    if (typeof text === 'undefined') {
+  text(value) {
+    if (typeof value === 'undefined') {
       return this._text;
     }
 
-    this._text.text(text);
+    this._text.text(value);
     return this;
   }
 
-  first(first) {
-    if (first === this._first) {
+  first(value) {
+    if (value === this._first) {
       return this;
     }
 
-    this._first = first;
-    this._border.style('display', first === true ? 'none' : 'inline');
+    this._first = value;
+    this._border.style('display', value === true ? 'none' : 'inline');
 
     return this;
   }

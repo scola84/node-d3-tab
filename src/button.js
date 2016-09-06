@@ -23,19 +23,19 @@ export default class TabButton {
     return this._root;
   }
 
-  selected(selected) {
-    if (typeof selected === 'undefined') {
+  selected(value) {
+    if (typeof value === 'undefined') {
       return this._selected;
     }
 
-    if (selected === this.selected) {
+    if (value === this.selected) {
       return this;
     }
 
-    this._selected = selected;
+    this._selected = value;
 
     this._root
-      .classed('selected', selected)
+      .classed('selected', value)
       .dispatch('select', {
         detail: {
           button: this

@@ -27,21 +27,21 @@ export default class PanelTabButton extends TabButton {
     this._bind();
   }
 
-  icon(name) {
-    if (typeof name === 'undefined') {
+  icon(value) {
+    if (typeof value === 'undefined') {
       return this._icon;
     }
 
-    this._icon.classed(name, true);
+    this._icon.classed(value, true);
     return this;
   }
 
-  text(text) {
-    if (typeof text === 'undefined') {
+  text(value) {
+    if (typeof value === 'undefined') {
       return this._text;
     }
 
-    this._text.text(text);
+    this._text.text(value);
     return this;
   }
 }

@@ -23,17 +23,17 @@ export default class InlineTabButtons extends TabButtons {
     });
   }
 
-  color(color) {
-    if (typeof color === 'undefined') {
+  color(value) {
+    if (typeof value === 'undefined') {
       return super.color();
     }
 
     this._inner.styles({
-      'border-color': color,
-      color
+      'border-color': value,
+      color: value
     });
 
-    return super.color(color);
+    return super.color(value);
   }
 
   _handleSelect() {
