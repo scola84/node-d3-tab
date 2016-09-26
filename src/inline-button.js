@@ -24,7 +24,7 @@ export default class InlineTabButton extends TabButton {
         'border-left-color': 'inherit',
         'height': '100%',
         'order': 1,
-        'width': 0
+        'width': '0px'
       });
 
     this._text = this._root
