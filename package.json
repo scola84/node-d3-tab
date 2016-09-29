@@ -1,6 +1,6 @@
 {
   "name": "@scola/d3-tab",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Tab",
   "repository": "github:scola84/node-d3-tab",
   "author": "M.C. van den Boogaart <scola@kvdb.name>",
