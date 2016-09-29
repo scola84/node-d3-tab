@@ -1,5 +1,6 @@
 import { event } from 'd3-selection';
 import TabButtons from './buttons';
+import 'd3-selection-multi';
 
 export default class InlineTabButtons extends TabButtons {
   constructor(tab) {

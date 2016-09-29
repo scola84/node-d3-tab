@@ -1,4 +1,5 @@
 import TabButton from './button';
+import 'd3-selection-multi';
 
 export default class PanelTabButton extends TabButton {
   constructor() {
