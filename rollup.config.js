@@ -1,13 +1,18 @@
 import buble from 'rollup-plugin-buble';
+import resolve from 'rollup-plugin-node-resolve';
 
 export default {
   entry: 'index.js',
   format: 'umd',
   globals: {
+    '@scola/d3-slider': 'd3',
     'd3-selection': 'd3',
-    '@scola/d3-slider': 'd3'
+    'd3-selection-multi': 'd3'
   },
   plugins: [
+    resolve({
+      jsnext: true
+    }),
     buble()
   ]
 };
