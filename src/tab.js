@@ -66,19 +66,6 @@ export default class Tab {
     return this._buttons;
   }
 
-  _insertButtons() {
-    this._buttons = this._root
-      .append('div')
-      .classed('scola buttons', true)
-      .styles({
-        'align-items': 'center',
-        'display': 'flex',
-        'height': '4em',
-        'justify-content': 'center',
-        'order': 1
-      });
-  }
-
   slider(action) {
     if (typeof action === 'undefined') {
       return this._slider;
@@ -123,6 +110,19 @@ export default class Tab {
   _unbindModel() {
     this._model.setMaxListeners(this._model.getMaxListeners() - 1);
     this._model.removeListener('set', this._handleModelSet);
+  }
+
+  _insertButtons() {
+    this._buttons = this._root
+      .append('div')
+      .classed('scola buttons', true)
+      .styles({
+        'align-items': 'center',
+        'display': 'flex',
+        'height': '4em',
+        'justify-content': 'center',
+        'order': 1
+      });
   }
 
   _modelSet(event) {
