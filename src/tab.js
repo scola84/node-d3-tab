@@ -1,4 +1,4 @@
-import { select } from 'd3-selection';
+import { event, select } from 'd3-selection';
 import { slider } from '@scola/d3-slider';
 import 'd3-selection-multi';
 
@@ -125,13 +125,13 @@ export default class Tab {
       });
   }
 
-  _modelSet(event) {
-    if (event.name !== this._name) {
+  _modelSet(setEvent) {
+    if (setEvent.name !== this._name) {
       return;
     }
 
-    if (this._tabs.has(event.value)) {
-      this._slider.toward(this._tabs.get(event.value));
+    if (this._tabs.has(setEvent.value)) {
+      this._slider.toward(this._tabs.get(setEvent.value));
     }
   }
 
