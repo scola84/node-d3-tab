@@ -4,6 +4,8 @@ import 'd3-selection-multi';
 
 export default class Tab {
   constructor() {
+    this._model = null;
+    this._name = null;
     this._tabs = new Map();
     this._slider = null;
 
@@ -31,11 +33,8 @@ export default class Tab {
   }
 
   destroy() {
-    if (this._slider) {
-      this._slider.root().on('slide.scola-tab', null);
-      this._slider.destroy();
-      this._slider = null;
-    }
+    this._unbindModel();
+    this._deleteSlider();
 
     this._root.dispatch('destroy');
     this._root.remove();
@@ -46,19 +45,31 @@ export default class Tab {
     return this._root;
   }
 
-  model(value) {
+  model(value = null) {
+    if (value === null) {
+      return this._model;
+    }
+
     this._model = value;
     this._bindModel();
 
     return this;
   }
 
-  name(itemName) {
-    this._name = itemName;
+  name(value = null) {
+    if (value === null) {
+      return this._name;
+    }
+
+    this._name = value;
     return this;
   }
 
-  buttons() {
+  buttons(action = true) {
+    if (action === false) {
+      return this._deleteButtons();
+    }
+
     if (!this._buttons) {
       this._insertButtons();
     }
@@ -66,50 +77,42 @@ export default class Tab {
     return this._buttons;
   }
 
-  slider(action) {
-    if (typeof action === 'undefined') {
-      return this._slider;
-    }
-
+  slider(action = true) {
     if (action === false) {
-      this._slider.destroy();
-      this._slider = null;
-
-      return this;
+      return this._deleteSlider();
     }
 
-    this._slider = slider()
-      .duration(0);
+    if (!this._slider) {
+      this._insertSlider();
+    }
 
-    this._slider.root()
-      .style('position', 'relative')
-      .on('slide.scola-tab', () => this._handleSlide());
-
-    this._inner.node()
-      .appendChild(this._slider.root().node());
-
-    return this;
+    return this._slider;
   }
 
-  append(name, tab, action) {
+  append(name, tab, action = true) {
     if (action === true) {
       this._tabs.set(name, tab);
-      this._slider.append(tab);
+      this.slider().append(tab);
     } else if (action === false) {
       this._tabs.delete(name);
+      this.slider().append(tab, false);
     }
 
     return this;
   }
 
   _bindModel() {
-    this._model.setMaxListeners(this._model.getMaxListeners() + 1);
-    this._model.addListener('set', this._handleModelSet);
+    if (this._model) {
+      this._model.setMaxListeners(this._model.getMaxListeners() + 1);
+      this._model.addListener('set', this._handleModelSet);
+    }
   }
 
   _unbindModel() {
-    this._model.setMaxListeners(this._model.getMaxListeners() - 1);
-    this._model.removeListener('set', this._handleModelSet);
+    if (this._model) {
+      this._model.setMaxListeners(this._model.getMaxListeners() - 1);
+      this._model.removeListener('set', this._handleModelSet);
+    }
   }
 
   _insertButtons() {
@@ -125,13 +128,46 @@ export default class Tab {
       });
   }
 
+  _deleteButtons() {
+    if (this._buttons) {
+      this._buttons.remove();
+      this._buttons = null;
+    }
+
+    return this;
+  }
+
+  _insertSlider() {
+    this._slider = slider()
+      .duration(0);
+
+    this._slider.root()
+      .style('position', 'relative')
+      .on('slide.scola-tab', () => this._handleSlide());
+
+    this._inner.node()
+      .appendChild(this._slider.root().node());
+
+    return this;
+  }
+
+  _deleteSlider() {
+    if (this._slider) {
+      this._slider.root().on('slide.scola-tab', null);
+      this._slider.destroy();
+      this._slider = null;
+    }
+
+    return this;
+  }
+
   _modelSet(setEvent) {
     if (setEvent.name !== this._name) {
       return;
     }
 
     if (this._tabs.has(setEvent.value)) {
-      this._slider.toward(this._tabs.get(setEvent.value));
+      this.slider().toward(this._tabs.get(setEvent.value));
     }
   }
 
