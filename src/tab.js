@@ -18,9 +18,9 @@ export default class Tab {
         'flex-direction': 'column'
       });
 
-    this._inner = this._root
+    this._body = this._root
       .append('div')
-      .classed('scola inner', true)
+      .classed('scola body', true)
       .styles({
         'flex': 1,
         'order': 2,
@@ -116,8 +116,9 @@ export default class Tab {
   }
 
   _insertButtons() {
-    this._buttons = this._root
+    this._buttons = select('body')
       .append('div')
+      .remove()
       .classed('scola buttons', true)
       .styles({
         'align-items': 'center',
@@ -126,6 +127,9 @@ export default class Tab {
         'justify-content': 'center',
         'order': 1
       });
+
+    this._root.node()
+      .insertBefore(this._buttons.node(), this._body.node());
   }
 
   _deleteButtons() {
@@ -145,7 +149,7 @@ export default class Tab {
       .style('position', 'relative')
       .on('slide.scola-tab', () => this._handleSlide());
 
-    this._inner.node()
+    this._body.node()
       .appendChild(this._slider.root().node());
 
     return this;
