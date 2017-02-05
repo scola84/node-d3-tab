@@ -29,7 +29,7 @@ export default class Tab {
         '-webkit-overflow-scrolling': 'touch'
       });
 
-    this._handleModelSet = (e) => this._modelSet(e);
+    this._handleSet = (e) => this._set(e);
   }
 
   destroy() {
@@ -90,28 +90,24 @@ export default class Tab {
   }
 
   append(name, tab, action = true) {
-    if (action === true) {
-      this._tabs.set(name, tab);
-      this.slider().append(tab);
-    } else if (action === false) {
-      this._tabs.delete(name);
-      this.slider().append(tab, false);
+    if (action === false) {
+      return this._deleteTab(name, tab);
     }
 
-    return this;
+    return this._insertTab(name, tab);
   }
 
   _bindModel() {
     if (this._model) {
       this._model.setMaxListeners(this._model.getMaxListeners() + 1);
-      this._model.addListener('set', this._handleModelSet);
+      this._model.addListener('set', this._handleSet);
     }
   }
 
   _unbindModel() {
     if (this._model) {
       this._model.setMaxListeners(this._model.getMaxListeners() - 1);
-      this._model.removeListener('set', this._handleModelSet);
+      this._model.removeListener('set', this._handleSet);
     }
   }
 
@@ -165,7 +161,21 @@ export default class Tab {
     return this;
   }
 
-  _modelSet(setEvent) {
+  _insertTab(name, tab) {
+    this._tabs.set(name, tab);
+    this.slider().append(tab);
+
+    return tab;
+  }
+
+  _deleteTab(name, tab) {
+    this._tabs.delete(name);
+    this.slider().append(tab, false);
+
+    return tab;
+  }
+
+  _set(setEvent) {
     if (setEvent.name !== this._name) {
       return;
     }
