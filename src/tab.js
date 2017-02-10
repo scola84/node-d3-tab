@@ -1,6 +1,5 @@
-import { event, select } from 'd3-selection';
+import { event, select } from 'd3';
 import { slider } from '@scola/d3-slider';
-import 'd3-selection-multi';
 
 export default class Tab {
   constructor() {
@@ -143,7 +142,7 @@ export default class Tab {
 
     this._slider.root()
       .style('position', 'relative')
-      .on('slide.scola-tab', () => this._handleSlide());
+      .on('slide.scola-tab', () => this._slide());
 
     this._body.node()
       .appendChild(this._slider.root().node());
@@ -185,7 +184,7 @@ export default class Tab {
     }
   }
 
-  _handleSlide() {
+  _slide() {
     event.detail.forEach((tab) => {
       this._tabs.forEach((value, index) => {
         if (tab === value && this._model.get(this._name) !== index) {
