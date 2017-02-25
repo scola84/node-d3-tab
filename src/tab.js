@@ -144,8 +144,8 @@ export default class Tab {
       .style('position', 'relative')
       .on('slide.scola-tab', () => this._slide());
 
-    this._body.node()
-      .appendChild(this._slider.root().node());
+    this._body
+      .append(() => this._slider.root().node());
 
     return this;
   }
