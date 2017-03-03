@@ -1,10 +1,11 @@
 import { event, select } from 'd3';
+import { Observer } from '@scola/d3-model';
 import { slider } from '@scola/d3-slider';
 
-export default class Tab {
+export default class Tab extends Observer {
   constructor() {
-    this._model = null;
-    this._name = null;
+    super();
+
     this._tabs = new Map();
     this._slider = null;
 
@@ -27,12 +28,9 @@ export default class Tab {
         'position': 'relative',
         '-webkit-overflow-scrolling': 'touch'
       });
-
-    this._handleSet = (e) => this._set(e);
   }
 
   destroy() {
-    this._unbindModel();
     this._deleteSlider();
 
     this._root.dispatch('destroy');
@@ -42,26 +40,6 @@ export default class Tab {
 
   root() {
     return this._root;
-  }
-
-  model(value = null) {
-    if (value === null) {
-      return this._model;
-    }
-
-    this._model = value;
-    this._bindModel();
-
-    return this;
-  }
-
-  name(value = null) {
-    if (value === null) {
-      return this._name;
-    }
-
-    this._name = value;
-    return this;
   }
 
   buttons(action = true) {
@@ -94,20 +72,6 @@ export default class Tab {
     }
 
     return this._insertTab(name, tab);
-  }
-
-  _bindModel() {
-    if (this._model) {
-      this._model.setMaxListeners(this._model.getMaxListeners() + 1);
-      this._model.addListener('set', this._handleSet);
-    }
-  }
-
-  _unbindModel() {
-    if (this._model) {
-      this._model.setMaxListeners(this._model.getMaxListeners() - 1);
-      this._model.removeListener('set', this._handleSet);
-    }
   }
 
   _insertButtons() {
