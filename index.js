@@ -1,5 +1,9 @@
 import Tab from './src/tab';
 
-export function tab() {
+function tab() {
   return new Tab();
 }
+
+export {
+  tab
+};
