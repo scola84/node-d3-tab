@@ -143,7 +143,7 @@ export default class Tab extends Observer {
       return;
     }
 
-    if (this._tabs.has(setEvent.value)) {
+    if (this._tabs.has(setEvent.value) === true) {
       this.slider().toward(this._tabs.get(setEvent.value));
     }
   }
