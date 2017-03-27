@@ -7,6 +7,7 @@ export default class Tab extends Observer {
     super();
 
     this._tabs = new Map();
+    this._buttons = null;
     this._slider = null;
 
     this._root = select('body')
@@ -47,7 +48,7 @@ export default class Tab extends Observer {
       return this._deleteButtons();
     }
 
-    if (!this._buttons) {
+    if (this._buttons === null) {
       this._insertButtons();
     }
 
@@ -59,7 +60,7 @@ export default class Tab extends Observer {
       return this._deleteSlider();
     }
 
-    if (!this._slider) {
+    if (this._slider === null) {
       this._insertSlider();
     }
 
