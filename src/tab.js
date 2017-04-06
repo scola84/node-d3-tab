@@ -32,6 +32,7 @@ export default class Tab extends Observer {
   }
 
   destroy() {
+    super.destroy();
     this._deleteSlider();
 
     this._root.dispatch('destroy');
