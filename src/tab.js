@@ -23,8 +23,7 @@ export default class Tab extends Observer {
       .append('div')
       .classed('scola body', true)
       .styles({
-        'flex': 1,
-        'order': 2,
+        'flex': 'auto',
         'overflow': 'auto',
         'position': 'relative',
         '-webkit-overflow-scrolling': 'touch'
@@ -85,8 +84,7 @@ export default class Tab extends Observer {
         'align-items': 'center',
         'display': 'flex',
         'height': '4em',
-        'justify-content': 'center',
-        'order': 1
+        'justify-content': 'center'
       });
 
     this._root.node()
