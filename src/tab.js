@@ -1,6 +1,5 @@
-import { event, select } from 'd3';
+import { select } from 'd3';
 import { Observer } from '@scola/d3-model';
-import { slider } from '@scola/d3-slider';
 
 export default class Tab extends Observer {
   constructor() {
@@ -8,7 +7,6 @@ export default class Tab extends Observer {
 
     this._tabs = new Map();
     this._buttons = null;
-    this._slider = null;
 
     this._root = select('body')
       .append('div')
@@ -21,18 +19,11 @@ export default class Tab extends Observer {
 
     this._body = this._root
       .append('div')
-      .classed('scola body', true)
-      .styles({
-        'flex': 'auto',
-        'overflow': 'auto',
-        'position': 'relative',
-        '-webkit-overflow-scrolling': 'touch'
-      });
+      .classed('scola body', true);
   }
 
   destroy() {
     super.destroy();
-    this._deleteSlider();
 
     this._root.dispatch('destroy');
     this._root.remove();
@@ -53,18 +44,6 @@ export default class Tab extends Observer {
     }
 
     return this._buttons;
-  }
-
-  slider(action = true) {
-    if (action === false) {
-      return this._deleteSlider();
-    }
-
-    if (this._slider === null) {
-      this._insertSlider();
-    }
-
-    return this._slider;
   }
 
   append(name, tab, action = true) {
@@ -100,40 +79,25 @@ export default class Tab extends Observer {
     return this;
   }
 
-  _insertSlider() {
-    this._slider = slider()
-      .duration(0);
-
-    this._slider.root()
-      .style('position', 'relative')
-      .on('slide.scola-tab', () => this._slide());
-
-    this._body
-      .append(() => this._slider.root().node());
-
-    return this;
-  }
-
-  _deleteSlider() {
-    if (this._slider) {
-      this._slider.root().on('slide.scola-tab', null);
-      this._slider.destroy();
-      this._slider = null;
-    }
-
-    return this;
-  }
-
   _insertTab(name, tab) {
     this._tabs.set(name, tab);
-    this.slider().append(tab);
+
+    tab.root().style('display', () => {
+      return this._tabs.size === 1 ? null : 'none';
+    });
+
+    this._body.append(() => tab.root().node());
+
+    if (this._tabs.size === 1) {
+      this._model.set(this._name, name);
+    }
 
     return tab;
   }
 
   _deleteTab(name, tab) {
     this._tabs.delete(name);
-    this.slider().append(tab, false);
+    tab.root().remove();
 
     return tab;
   }
@@ -143,17 +107,13 @@ export default class Tab extends Observer {
       return;
     }
 
-    if (this._tabs.has(setEvent.value) === true) {
-      this.slider().toward(this._tabs.get(setEvent.value));
-    }
-  }
-
-  _slide() {
-    event.detail.forEach((tab) => {
-      this._tabs.forEach((value, index) => {
-        if (tab === value && this._model.get(this._name) !== index) {
-          this._model.set(this._name, index);
-        }
+    this._tabs.forEach((tab, name) => {
+      tab.root().styles(() => {
+        return name === setEvent.value ? {
+          'display': null
+        } : {
+          'display': 'none'
+        };
       });
     });
   }
